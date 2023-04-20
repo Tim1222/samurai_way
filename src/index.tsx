@@ -1,9 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import state from "./redux/State";
+import {rerenderEnrireTree} from "./render";
 
-ReactDOM.render(
-    <App />,
-  document.getElementById('root')
-);
+
+// postData={postData} dialogsData={dialogsData} messagesData={messagesData}
+
+// addPost('hello')
+
+// export let rerenderEnrireTree = () => {
+//     ReactDOM.render(
+//         <BrowserRouter>
+//             <App state={state} addPost={addPost}/>,</BrowserRouter>,
+//         document.getElementById('root')
+//     );
+// }
+
+rerenderEnrireTree(state);
+
+//@ts-ignore
+// window._state = state

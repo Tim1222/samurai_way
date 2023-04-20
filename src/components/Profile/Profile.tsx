@@ -1,16 +1,19 @@
 import React from "react";
-import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostDataType} from "../../redux/State";
 
-const Profile = () => {
+type postDataType = {
+    postData: PostDataType[]
+    addPost: (text:string) => void
+}
+
+const Profile = (props: postDataType) => {
+
+
     return <div>
-        <div>
-            <img className={s.item} src='https://cdn.pixabay.com/photo/2020/08/28/11/10/ocean-5524264_1280.jpg'/>
-        </div>
-        <div>
-            ava+description
-        </div>
-        <MyPosts/>
+        <ProfileInfo/>
+        <MyPosts postData={props.postData} addPost={props.addPost}/>
     </div>
 }
 
