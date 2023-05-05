@@ -1,5 +1,9 @@
-import React from 'react';
-import {rerenderEnrireTree} from "../render";
+import React from 'react'
+
+
+let rerenderEnrireTree = () => {
+    console.log('chaged')
+}
 
 export type StateType = {
     profilePage: ProfilePageType
@@ -63,15 +67,19 @@ export let addPost = () => {
 
     state.profilePage.postData.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEnrireTree(state)
+    rerenderEnrireTree()
 }
 
 export type updateNewPostTextPropsType = {
     updateNewPostText: (value: string) => void
 }
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
-    rerenderEnrireTree(state)
+    rerenderEnrireTree()
+}
+
+export const subscribe = (observer: () => void) => {
+    rerenderEnrireTree = observer;
 }
 
 // let postData: PostDataType[] = [
@@ -91,6 +99,5 @@ export let updateNewPostText = (newText: string) => {
 //     {id: 2, message: 'How are you?'},
 //     {id: 3, message: 'Yo'}
 // ]
-
 
 export default state;
