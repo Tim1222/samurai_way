@@ -1,11 +1,13 @@
 import React, {RefObject} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostDataType} from "../../../redux/State";
+import {PostDataType, updateNewPostText} from "../../../redux/State";
 
 type postDataProps = {
     postData: PostDataType[]
-    addPost: (text: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (value: string) => void
 }
 
 
@@ -22,17 +24,24 @@ const MyPosts = (props: postDataProps) => {
 
     const addPost = () => {
         if (newPostElement.current) {
-            let text = newPostElement.current.value
-            props.addPost(text)
-            newPostElement.current.value = ''
+
+            props.addPost()
+            // newPostElement.current.value = ''
+            props.updateNewPostText('')
         }
     }
 
+    let onPostChange = () => {
+        if (newPostElement.current) {
+            let text = newPostElement.current?.value
+            props.updateNewPostText(text)
+        }
+    }
     return <div className={s.postsBlock}>
         <h3>My posts</h3>
         <div>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}/>
             </div>
             <div>
                 <button onClick={addPost}>Add post</button>

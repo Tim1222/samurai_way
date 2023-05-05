@@ -1,11 +1,13 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostDataType} from "../../redux/State";
+import {PostDataType, updateNewPostText} from "../../redux/State";
 
 type postDataType = {
     postData: PostDataType[]
-    addPost: (text:string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (value: string) => void
 }
 
 const Profile = (props: postDataType) => {
@@ -13,7 +15,11 @@ const Profile = (props: postDataType) => {
 
     return <div>
         <ProfileInfo/>
-        <MyPosts postData={props.postData} addPost={props.addPost}/>
+        <MyPosts postData={props.postData}
+                 addPost={props.addPost}
+                 newPostText={props.newPostText}
+                 updateNewPostText={props.updateNewPostText}
+        />
     </div>
 }
 

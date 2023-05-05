@@ -7,6 +7,7 @@ export type StateType = {
 }
 export type ProfilePageType = {
     postData: PostDataType[]
+    newPostText: string
 }
 export type PostDataType = {
     id: number
@@ -33,7 +34,8 @@ let state: StateType = {
             {id: 2, message: 'How are you?'},
             {id: 3, message: 'Where do you live'},
             {id: 4, message: 'How are you?'}
-        ]
+        ],
+        newPostText: 'it-kryto'
     },
     messagesPage: {
         dialogsData: [
@@ -52,14 +54,22 @@ let state: StateType = {
 }
 
 
-export let addPost = (text: string) => {
+export let addPost = () => {
     let newPost = {
         id: state.profilePage.postData.length + 1,
-        message: text,
+        message: state.profilePage.newPostText,
         likes: 0
     }
 
     state.profilePage.postData.push(newPost)
+    rerenderEnrireTree(state)
+}
+
+export type updateNewPostTextPropsType = {
+    updateNewPostText: (value: string) => void
+}
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
     rerenderEnrireTree(state)
 }
 
