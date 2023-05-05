@@ -62,6 +62,7 @@ export let addPost = () => {
     }
 
     state.profilePage.postData.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEnrireTree(state)
 }
 

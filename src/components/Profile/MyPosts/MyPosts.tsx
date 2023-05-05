@@ -24,10 +24,8 @@ const MyPosts = (props: postDataProps) => {
 
     const addPost = () => {
         if (newPostElement.current) {
-
             props.addPost()
-            // newPostElement.current.value = ''
-            props.updateNewPostText('')
+
         }
     }
 
