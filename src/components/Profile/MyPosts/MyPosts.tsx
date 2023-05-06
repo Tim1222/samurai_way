@@ -1,13 +1,12 @@
-import React, {RefObject} from "react";
+import React from "react";
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostDataType, updateNewPostText} from "../../../redux/State";
+import {ActionTypes, PostDataType} from "../../../redux/State";
 
 type postDataProps = {
     postData: PostDataType[]
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (value: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 
@@ -24,7 +23,7 @@ const MyPosts = (props: postDataProps) => {
 
     const addPost = () => {
         if (newPostElement.current) {
-            props.addPost()
+            props.dispatch({type: 'ADD-POST', newPostText: 'test'})
 
         }
     }
@@ -32,7 +31,8 @@ const MyPosts = (props: postDataProps) => {
     let onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current?.value
-            props.updateNewPostText(text)
+            let action = {type: 'UPDATE-NEW-POST-TEXT', newText:text } as const;
+            props.dispatch(action)
         }
     }
     return <div className={s.postsBlock}>
