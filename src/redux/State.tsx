@@ -1,5 +1,8 @@
 import React from 'react'
 
+const type = 'ADD-POST';
+const type1 = 'UPDATE-NEW-POST-TEXT';
+
 export type StoreType = {
     _state: StateType
     _callSubscriber: (state: StateType) => void
@@ -7,8 +10,6 @@ export type StoreType = {
     subscribe: (observer: (state: StateType) => void) => void
     dispatch: (action: ActionTypes) => void
 }
-
-
 export type StateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
@@ -47,6 +48,8 @@ type ChangeNewTextActionType = {
     newText: string
 }
 
+
+
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -84,7 +87,7 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === type) {
             let newPost = {
                 id: this._state.profilePage.postData.length + 1,
                 message: this._state.profilePage.newPostText,
@@ -94,11 +97,24 @@ let store: StoreType = {
             this._state.profilePage.postData.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === type1) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state)
         }
     }
+}
+
+export const addPostActionCreator = () => {
+    return {
+        type: type,
+        newPostText: 'test'
+    } as const
+}
+export const updateNewPostTextActionCreator = (text: string) => {
+    return {
+        type: type1,
+        newText: text
+    } as const
 }
 
 export default store;
